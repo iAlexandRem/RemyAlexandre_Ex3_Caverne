@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "RemyAlexandre_Ex3_Caverne.slnx"
+    "dotnet.defaultSolution": "RemyAlexandre_Ex3.slnx"
 }

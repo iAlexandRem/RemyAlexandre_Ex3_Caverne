@@ -36,6 +36,8 @@ public class Personnage : MonoBehaviour
 
     [Header("Dash")]
     public float forceDash = 10f;
+    public float delaiDashMin = 0.67f;
+    public float tempsEntreDash = 0f;
 
     AudioSource audioSource;
     public AudioClip sfxSonShoot;
@@ -93,12 +95,14 @@ public class Personnage : MonoBehaviour
         }
         Debug.DrawRay(transform.position, Vector2.down, Color.orange);
 
+
+
         if (tempsEntreTir > 0)
         {
             tempsEntreTir -= Time.deltaTime;
         }
 
-        if (actionTir.WasPressedThisFrame() == true && tempsEntreTir <= 0) // && !enDeplacement pour ne pas glisser en shootant mais c'est plus fun de bouger et shoot
+        if (actionTir.WasPressedThisFrame() == true && tempsEntreTir <= 0f) // && !enDeplacement pour ne pas glisser en shootant mais c'est plus fun de bouger et shoot
         {
             anim.SetTrigger("estEnTir");
             audioSource.PlayOneShot(sfxSonShoot);
@@ -124,11 +128,17 @@ public class Personnage : MonoBehaviour
 
 
 
-        if (actionDash.WasPressedThisFrame() == true) // C'est le temps de DASH let's go
+        if (tempsEntreDash > 0f)
+        {
+            tempsEntreDash -= Time.deltaTime;
+        }
+
+        if (actionDash.WasPressedThisFrame() == true && tempsEntreDash <= 0f) // C'est le temps de DASH let's go
         {
             anim.SetTrigger("aDash");
             audioSource.PlayOneShot(sfxDash, 0.3f);
 
+            tempsEntreDash = delaiDashMin;
 
             float direction; // Nouveau float de direction, car celui de directionDeplacement est nul de base 
 
