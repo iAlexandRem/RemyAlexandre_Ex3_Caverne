@@ -41,6 +41,7 @@ public class Personnage : MonoBehaviour
     public AudioClip sfxSonShoot;
     public AudioClip sfxBasseFrequence;
     public AudioClip sfxSaut;
+    public AudioClip sfxDash;
 
 
     void OnEnable()
@@ -126,6 +127,7 @@ public class Personnage : MonoBehaviour
         if (actionDash.WasPressedThisFrame() == true) // C'est le temps de DASH let's go
         {
             anim.SetTrigger("aDash");
+            audioSource.PlayOneShot(sfxDash, 0.3f);
 
 
             float direction; // Nouveau float de direction, car celui de directionDeplacement est nul de base 
